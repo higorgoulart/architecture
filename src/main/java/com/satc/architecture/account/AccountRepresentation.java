@@ -56,6 +56,10 @@ public interface AccountRepresentation {
 
         public static AccountResponse from(AccountEntity account) {
             return AccountResponse.builder()
+                    .id(account.getId())
+                    .userName(account.getUserName())
+                    .name(account.getName())
+                    .email(account.getEmail())
                     .build();
         }
     }

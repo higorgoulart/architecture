@@ -21,13 +21,19 @@ public class AccountService {
             throw new BusinessException("A senha e a confirmação não são iguais");
         }
 
-        AccountEntity email =
-                this.accountRepository.validateField("email", newAccount.getEmail());
-
-
-        if(!Objects.isNull(email)) {
+        String email =
+                this.accountRepository.validateEmail(newAccount.getEmail());
+        if(!Objects.isNull(email) && !email.isEmpty()) {
             throw new BusinessException("O email já está sendo utilizado por outra conta");
         }
+
+        String userName =
+                this.accountRepository.validateUserName(newAccount.getUserName());
+        if(!Objects.isNull(userName) && !userName.isEmpty()) {
+            throw new BusinessException("O userName já está sendo utilizado por outra conta");
+        }
+
+
     }
 
     public AccountEntity createAccount(AccountRepresentation.CreateAccount newAccount) {
@@ -35,6 +41,7 @@ public class AccountService {
         return this.accountRepository.save(AccountEntity.builder()
                 .name(newAccount.getName())
                 .document(newAccount.getDocument())
+                .email(newAccount.getEmail())
                 .userName(newAccount.getUserName())
                 .password(newAccount.getPassword())
                 .build());
