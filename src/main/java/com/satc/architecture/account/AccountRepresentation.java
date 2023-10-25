@@ -43,6 +43,22 @@ public interface AccountRepresentation {
 
 
     }
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
+    @Data
+    class AccountResponse {
+        private Long id;
+        private String name;
+        private String email;
+        private String userName;
+
+
+        public static AccountResponse from(AccountEntity account) {
+            return AccountResponse.builder()
+                    .build();
+        }
+    }
 
     @Builder
     @AllArgsConstructor

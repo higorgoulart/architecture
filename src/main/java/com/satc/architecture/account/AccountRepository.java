@@ -1,8 +1,11 @@
 package com.satc.architecture.account;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.UUID;
+public interface AccountRepository extends CrudRepository<AccountEntity, Long>{
 
-public interface AccountRepository{
+
+    @Query(value = "Select ?1 from AccountEntity where ?1 = ?2")
+    public AccountEntity validateField(String field, String value);
 }

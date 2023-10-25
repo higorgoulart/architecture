@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class AccountController {
 
     private AccountService accountService;
-//    private AccountRepository accountRepository;
 
     @PostMapping
     @RequestMapping("new-account")
@@ -24,6 +23,10 @@ public class AccountController {
 
         this.accountService.validadeBusiness(newAccount);
 
-        return ResponseEntity.ok().build();
+        AccountEntity newAccountEntity =
+                this.accountService.createAccount(newAccount);
+
+        return ResponseEntity.status(201)
+                .body(AccountRepresentation.AccountResponse.from(newAccountEntity));
     }
 }
