@@ -1,0 +1,8 @@
+package com.satc.architecture.account;
+
+import org.springframework.data.repository.CrudRepository;
+
+import java.util.UUID;
+
+public interface AccountRepository{
+}
