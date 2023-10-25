@@ -64,15 +64,5 @@ public interface AccountRepresentation {
         }
     }
 
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor
-    @Data
-    class PaymentInfo {
-        private String cardNumber;
-        private String cardHolder;
-        private String cardCvv;
-        private String expirationDate;
-    }
 
 }
