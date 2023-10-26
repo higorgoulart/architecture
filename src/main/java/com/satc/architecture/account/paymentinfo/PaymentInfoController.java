@@ -20,10 +20,14 @@ public class PaymentInfoController {
     private PaymentInfoService paymentInfoService;
 
 
+
     @PostMapping
     @RequestMapping("create")
     public ResponseEntity createNewAccountPayment(
-           @Validated @RequestBody PaymentInfoRepresentation.CreatePaymentInfo createPaymentInfo) {
+            @Validated @RequestBody PaymentInfoRepresentation.CreatePaymentInfo createPaymentInfo) {
+
+        PaymentInfoEntity paymentInfoEntity =
+                PaymentInfoFactory.getPaymentInfoEntity(createPaymentInfo);
 
 
         return ResponseEntity.ok().build();
