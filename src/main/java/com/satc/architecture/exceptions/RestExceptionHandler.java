@@ -2,7 +2,6 @@ package com.satc.architecture.exceptions;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,13 +12,10 @@ import java.time.LocalDateTime;
 
 @RestControllerAdvice
 public class RestExceptionHandler {
-
-
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
     public ErrorPayload handleNotFoundException(Exception exception, HttpServletRequest request) {
-
         return ErrorPayload.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.NOT_FOUND.value())
@@ -28,11 +24,11 @@ public class RestExceptionHandler {
                 .path(request.getContextPath() + request.getServletPath())
                 .build();
     }
+
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ResponseBody
     public ErrorPayload handleBusinessException(Exception exception, HttpServletRequest request) {
-
         return ErrorPayload.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
@@ -46,14 +42,12 @@ public class RestExceptionHandler {
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
     @ResponseBody
     public ErrorPayload handleValidateException(MethodArgumentNotValidException exception, HttpServletRequest request) {
-        BindingResult result = exception.getBindingResult();
         return ErrorPayload.builder()
                 .timestamp(LocalDateTime.now())
                 .status(HttpStatus.UNPROCESSABLE_ENTITY.value())
                 .error(HttpStatus.UNPROCESSABLE_ENTITY.getReasonPhrase())
-                .message(result.getFieldErrors().get(0).getDefaultMessage())
+                .message(exception.getBindingResult().getFieldErrors().get(0).getDefaultMessage())
                 .path(request.getContextPath() + request.getServletPath())
                 .build();
     }
-
 }

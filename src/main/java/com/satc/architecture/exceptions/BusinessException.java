@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
 public class BusinessException extends RuntimeException {
-
     public BusinessException() {
         super();
     }
@@ -17,5 +16,4 @@ public class BusinessException extends RuntimeException {
     public BusinessException(final String message, final Throwable cause) {
         super(message, cause);
     }
-
 }

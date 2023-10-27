@@ -11,13 +11,11 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 public interface PaymentInfoRepresentation {
-
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
     @Data
     class CreatePaymentInfo {
-
         @NotNull
         private PaymentType paymentType;
 
@@ -35,20 +33,20 @@ public interface PaymentInfoRepresentation {
     class CreateCreditCardInfo {
         @NotNull
         @NotEmpty
-        private String cardHolder;
+        private String holder;
 
         @NotNull
         @NotEmpty
-        private String cardNumber;
+        private String number;
 
         @NotNull
         @NotEmpty
         private String cardCvv;
 
         @NotNull
-//        @NotEmpty
         private LocalDate expirationDate;
     }
+    
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor
@@ -58,12 +56,12 @@ public interface PaymentInfoRepresentation {
         @NotEmpty(message = "O nome não pode ser vazio")
         private String name;
 
-        @NotNull(message = "O email não pode ser nulo")
-        @NotEmpty(message = "O email não pode ser vazio")
+        @NotNull(message = "O e-mail não pode ser nulo")
+        @NotEmpty(message = "O e-mail não pode ser vazio")
         private String email;
 
-        @NotNull(message = "O document não pode ser nulo")
-        @NotEmpty(message = "O document não pode ser vazio")
+        @NotNull(message = "O documento não pode ser nulo")
+        @NotEmpty(message = "O documento não pode ser vazio")
         private String document;
     }
 }
