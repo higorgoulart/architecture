@@ -15,6 +15,9 @@ public class SubscriptionService {
         if (account.isEmpty()) return null;
 
         var newSub = new Subscription(createSubscription, account.get());
+
+        newSub.subscribe(createSubscription.getIdAccount(), createSubscription.getPlan());
+
         return SubscriptionFactory.getSubscriptionEntity(newSub);
     }
 }

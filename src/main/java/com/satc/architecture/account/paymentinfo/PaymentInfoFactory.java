@@ -1,12 +1,11 @@
 package com.satc.architecture.account.paymentinfo;
 
 public class PaymentInfoFactory {
-
     public static PaymentInfoEntity getPaymentInfoEntity(
             PaymentInfoRepresentation.CreatePaymentInfo createPaymentInfo) {
         return switch (createPaymentInfo.getPaymentType()) {
             case BANK_SLIP -> buildBankSlip(createPaymentInfo);
-            default -> buildCreditCard(createPaymentInfo);
+            case CREDIT_CARD -> buildCreditCard(createPaymentInfo);
         };
     }
 
